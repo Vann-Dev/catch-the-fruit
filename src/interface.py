@@ -10,7 +10,9 @@ class Interface:
         self.widget_text = ""
 
     def home_screen(self):
-        selection_hover = "start_game"
+        selection_hover = "start game"
+        selections = ["start game", "tutorial", "quit"]
+
         self.engine.screen_state = None
 
         while True:
@@ -30,38 +32,32 @@ class Interface:
             """)
 
             print(f"""
-            {selection_hover == "start_game" and "➡️ \033[34m" or "‎"}\tStart Game\033[m
-            {selection_hover == "tutorial" and "➡️ \033[34m" or "‎"}\tTutorial\033[m
-            {selection_hover == "quit" and "➡️ \033[34m" or "‎"}\tQuit\033[m
+{"\n".join(selection_hover == selection and "\t➡️ ‎ \033[34m" + selection.capitalize() + "\033[m" or "\t‎   " + selection.capitalize() for selection in selections)}
 
-            Use W and S to navigate, press Enter to select
+\tUse W and S to navigate, press Enter to select
             """)
 
             key = msvcrt.getch()
 
             if key == bytes("w", "utf-8"):
-                if selection_hover == "start_game":
-                    selection_hover = "quit"
-                elif selection_hover == "tutorial":
-                    selection_hover = "start_game"
-                elif selection_hover == "quit":
-                    selection_hover = "tutorial"
+                selection_hover = selections[
+                    (selections.index(selection_hover) - 1) % len(selections)
+                ]
 
             elif key == bytes("s", "utf-8"):
-                if selection_hover == "start_game":
-                    selection_hover = "tutorial"
-                elif selection_hover == "tutorial":
-                    selection_hover = "quit"
-                elif selection_hover == "quit":
-                    selection_hover = "start_game"
+                selection_hover = selections[
+                    (selections.index(selection_hover) + 1) % len(selections)
+                ]
 
             elif key == bytes("\r", "utf-8"):
-                if selection_hover == "start_game":
+                if selection_hover == "start game":
                     self.engine.screen_state = screens["select"]
                     break
+
                 elif selection_hover == "tutorial":
                     self.engine.screen_state = screens["tutorial"]
                     break
+
                 elif selection_hover == "quit":
                     os.system("cls" if os.name == "nt" else "clear")
                     exit()
@@ -93,7 +89,9 @@ Fruit Remaining: {self.engine.map.fruit_size}
 
     def select_mode_screen(self):
         self.engine.screen_state = None
+
         selection_hover = "normal"
+        selections = ["normal", "normal_dark", "big", "big_dark", "quit"]
 
         while True:
             os.system("cls" if os.name == "nt" else "clear")
@@ -112,40 +110,22 @@ Fruit Remaining: {self.engine.map.fruit_size}
             """)
 
             print(f"""
-            {selection_hover == "normal" and "➡️ \033[34m" or "‎"}\tNormal\033[m
-            {selection_hover == "normal_dark" and "➡️ \033[34m" or "‎"}\tNormal Dark\033[m
-            {selection_hover == "big" and "➡️ \033[34m" or "‎"}\tBig\033[m
-            {selection_hover == "big_dark" and "➡️ \033[34m" or "‎"}\tBig Dark\033[m
-            {selection_hover == "quit" and "➡️ \033[34m" or "‎"}\tBack\033[m
+{"\n".join(selection_hover == selection and "\t➡️ ‎ \033[34m" + " ".join(selection.split("_")).capitalize() + "\033[m" or "\t‎   " + " ".join(selection.split("_")).capitalize() for selection in selections)}
 
-            Use W and S to navigate, press Enter to select
-            """)
+\tUse W and S to navigate, press Enter to select
+""")
 
             key = msvcrt.getch()
 
             if key == bytes("w", "utf-8"):
-                if selection_hover == "normal":
-                    selection_hover = "quit"
-                elif selection_hover == "normal_dark":
-                    selection_hover = "normal"
-                elif selection_hover == "big":
-                    selection_hover = "normal_dark"
-                elif selection_hover == "big_dark":
-                    selection_hover = "big"
-                elif selection_hover == "quit":
-                    selection_hover = "big_dark"
+                selection_hover = selections[
+                    (selections.index(selection_hover) - 1) % len(selections)
+                ]
 
             elif key == bytes("s", "utf-8"):
-                if selection_hover == "normal":
-                    selection_hover = "normal_dark"
-                elif selection_hover == "normal_dark":
-                    selection_hover = "big"
-                elif selection_hover == "big":
-                    selection_hover = "big_dark"
-                elif selection_hover == "big_dark":
-                    selection_hover = "quit"
-                elif selection_hover == "quit":
-                    selection_hover = "normal"
+                selection_hover = selections[
+                    (selections.index(selection_hover) + 1) % len(selections)
+                ]
 
             elif key == bytes("\r", "utf-8"):
                 if selection_hover == "quit":
@@ -158,6 +138,8 @@ Fruit Remaining: {self.engine.map.fruit_size}
 
     def pause_screen(self):
         selection_hover = "continue"
+        selections = ["continue", "restart", "quit"]
+
         self.engine.screen_state = None
 
         while True:
@@ -177,30 +159,22 @@ Fruit Remaining: {self.engine.map.fruit_size}
             """)
 
             print(f"""
-            {selection_hover == "continue" and "➡️ \033[34m" or "‎"}\tContinue\033[m
-            {selection_hover == "restart" and "➡️ \033[34m" or "‎"}\tRestart\033[m
-            {selection_hover == "quit" and "➡️ \033[34m" or "‎"}\tQuit\033[m
+{"\n".join(selection_hover == selection and "\t➡️ ‎ \033[34m" + selection.capitalize() + "\033[m" or "\t‎   " + selection.capitalize() for selection in selections)}
 
-            Use W and S to navigate, press Enter to select
+\tUse W and S to navigate, press Enter to select
             """)
 
             key = msvcrt.getch()
 
             if key == bytes("w", "utf-8"):
-                if selection_hover == "continue":
-                    selection_hover = "quit"
-                elif selection_hover == "restart":
-                    selection_hover = "continue"
-                elif selection_hover == "quit":
-                    selection_hover = "restart"
+                selection_hover = selections[
+                    (selections.index(selection_hover) - 1) % len(selections)
+                ]
 
             elif key == bytes("s", "utf-8"):
-                if selection_hover == "continue":
-                    selection_hover = "restart"
-                elif selection_hover == "restart":
-                    selection_hover = "quit"
-                elif selection_hover == "quit":
-                    selection_hover = "continue"
+                selection_hover = selections[
+                    (selections.index(selection_hover) + 1) % len(selections)
+                ]
 
             elif key == bytes("\r", "utf-8"):
                 if selection_hover == "continue":
