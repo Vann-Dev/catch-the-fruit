@@ -1,6 +1,7 @@
 import msvcrt
 import os
 import time
+from src.lib.constant import screens
 
 
 class Interface:
@@ -56,10 +57,10 @@ class Interface:
 
             elif key == bytes("\r", "utf-8"):
                 if selection_hover == "start_game":
-                    self.engine.screen_state = "select_mode"
+                    self.engine.screen_state = screens["select"]
                     break
                 elif selection_hover == "tutorial":
-                    self.engine.screen_state = "tutorial"
+                    self.engine.screen_state = screens["tutorial"]
                     break
                 elif selection_hover == "quit":
                     os.system("cls" if os.name == "nt" else "clear")
@@ -148,11 +149,11 @@ Fruit Remaining: {self.engine.map.fruit_size}
 
             elif key == bytes("\r", "utf-8"):
                 if selection_hover == "quit":
-                    self.engine.screen_state = "home_screen"
+                    self.engine.screen_state = screens["home"]
                     break
                 else:
                     self.engine.init_game(selection_hover)
-                    self.engine.screen_state = "game_screen"
+                    self.engine.screen_state = screens["game"]
                     break
 
     def pause_screen(self):
@@ -203,14 +204,14 @@ Fruit Remaining: {self.engine.map.fruit_size}
 
             elif key == bytes("\r", "utf-8"):
                 if selection_hover == "continue":
-                    self.engine.screen_state = "game_screen"
+                    self.engine.screen_state = screens["game"]
                     break
                 elif selection_hover == "restart":
                     self.engine.init_game(self.engine.game_mode)
-                    self.engine.screen_state = "game_screen"
+                    self.engine.screen_state = screens["game"]
                     break
                 elif selection_hover == "quit":
-                    self.engine.screen_state = "home_screen"
+                    self.engine.screen_state = screens["home"]
                     break
 
     def game_screen(self):
@@ -254,4 +255,4 @@ Game made by: Stevan Vincent (31230016) [https://www.vann.my.id]
 
         input("Press enter to continue...")
 
-        self.engine.screen_state = "home_screen"
+        self.engine.screen_state = screens["home"]

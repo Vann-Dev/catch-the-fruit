@@ -2,6 +2,7 @@ from src.lib.queue import Queue
 from src.map import Map
 from src.player import Player
 from src.interface import Interface
+from src.lib.constant import screens
 import time
 import msvcrt
 import os
@@ -17,7 +18,7 @@ class GameEngine:
         self.interface = Interface(self)
         self.game_mode = "normal"
 
-        self.screen_state = "home_screen"
+        self.screen_state = screens["home"]
         self.current_screen = None
 
         self.total_fruit_collected = 0
@@ -44,27 +45,27 @@ class GameEngine:
             if not self.screen_state:
                 continue
 
-            if self.screen_state == "home_screen":
+            if self.screen_state == screens["home"]:
                 self.current_screen = self.screen_state
                 self.interface.home_screen()
 
-            if self.screen_state == "tutorial":
+            if self.screen_state == screens["tutorial"]:
                 self.current_screen = self.screen_state
                 self.interface.tutorial_screen()
 
-            if self.screen_state == "credit_screen":
+            if self.screen_state == screens["credit"]:
                 self.current_screen = self.screen_state
                 self.interface.credit_screen()
 
-            if self.screen_state == "select_mode":
+            if self.screen_state == screens["select"]:
                 self.current_screen = self.screen_state
                 self.interface.select_mode_screen()
 
-            if self.screen_state == "game_screen":
+            if self.screen_state == screens["game"]:
                 self.current_screen = self.screen_state
                 self.interface.game_screen()
 
-            if self.screen_state == "pause_screen":
+            if self.screen_state == screens["pause"]:
                 self.current_screen = self.screen_state
                 self.interface.pause_screen()
 
@@ -84,11 +85,11 @@ class GameEngine:
             elif key == bytes("d", "utf-8"):
                 self.player.move("right")
             elif key == b"\x1b":
-                if self.current_screen == "tutorial":
-                    self.screen_state = "home_screen"
+                if self.current_screen == screens["tutorial"]:
+                    self.screen_state = screens["home"]
 
-                if self.current_screen == "game_screen":
-                    self.screen_state = "pause_screen"
+                if self.current_screen == screens["game"]:
+                    self.screen_state = screens["pause"]
 
                 break
             else:

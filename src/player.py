@@ -1,4 +1,4 @@
-from src.lib.constant import road, fruits, door
+from src.lib.constant import road, fruits, door, screens
 
 
 class Player:
@@ -71,7 +71,7 @@ class Player:
 
         if touching_door:
             if self.map.fruit_size < 2 and self.engine.fruit.is_empty():
-                self.engine.screen_state = "credit_screen"
+                self.engine.screen_state = screens["credit"]
                 self.engine.game_end = True
             else:
                 self.engine.clear_fruit()

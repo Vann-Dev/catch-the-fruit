@@ -4,18 +4,21 @@ car = "🚗"
 road = "🟫"
 door = "🚪"
 
-# 2 menit 64*32
-# 45 detik 32*16
-
-# 1.30 menit dark 32*16
-# 5 menit dark 64*32
-
 modes = {
     "normal": {"height": 16, "width": 32, "fruit": 10, "fogg": False},
     "normal_dark": {"height": 16, "width": 32, "fruit": 10, "fogg": True},
     "tutorial": {"height": 5, "width": 10, "fruit": 2, "fogg": False},
     "big": {"height": 32, "width": 64, "fruit": 50, "fogg": False},
     "big_dark": {"height": 32, "width": 64, "fruit": 50, "fogg": True},
+}
+
+screens = {
+    "home": "home_screen",
+    "tutorial": "tutorial_screen",
+    "credit": "credit_screen",
+    "select": "select_mode",
+    "game": "game_screen",
+    "pause": "pause_screen",
 }
 
 
