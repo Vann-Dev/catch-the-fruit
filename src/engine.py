@@ -97,9 +97,7 @@ class GameEngine:
 
             os.system("cls" if os.name == "nt" else "clear")
 
-            self.map.print()
-
-            self.interface.stats_widget()
+            self.interface.game_screen_playing()
 
     def clear_fruit(self):
         if not self.__clear_fruit_thread:
@@ -110,6 +108,14 @@ class GameEngine:
         while not self.fruit.is_empty():
             self.fruit.dequeue()
             self.total_fruit_collected += 1
+            self.interface.game_screen_playing()
+            if self.player.touching_door:
+                if self.map.fruit_size < 2 and self.fruit.is_empty():
+                    self.screen_state = screens["credit"]
+                    self.game_end = True
+                    break
+                else:
+                    self.clear_fruit()
             time.sleep(1)
 
         self.__clear_fruit_thread = None

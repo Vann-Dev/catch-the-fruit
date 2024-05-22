@@ -7,6 +7,7 @@ class Player:
         self.pos_y = 0
         self.map = None
         self.engine = engine
+        self.touching_door = False
 
     def init(self, map):
         self.map = map
@@ -49,9 +50,9 @@ class Player:
             case _:
                 return
 
-        touching_door = False
+        self.touching_door = False
         if check_path(current_pos_x, current_pos_y, door_only=True):
-            touching_door = True
+            self.touching_door = True
 
         if check_path(current_pos_x, current_pos_y, fruit_only=True):
             self.engine.fruit.enqueue(
@@ -69,7 +70,7 @@ class Player:
         self.pos_x = current_pos_x
         self.pos_y = current_pos_y
 
-        if touching_door:
+        if self.touching_door:
             if self.map.fruit_size < 2 and self.engine.fruit.is_empty():
                 self.engine.screen_state = screens["credit"]
                 self.engine.game_end = True

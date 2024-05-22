@@ -219,7 +219,7 @@ Game made by: Stevan Vincent (31230016) [https://www.vann.my.id]
 \033[m
         """)
 
-        time.sleep(3)
+        time.sleep(1)
 
         print(f"""
 🍇 Fruit Collected: {self.engine.total_fruit_collected}
@@ -230,3 +230,9 @@ Game made by: Stevan Vincent (31230016) [https://www.vann.my.id]
         input("Press enter to continue...")
 
         self.engine.screen_state = screens["home"]
+
+    def game_screen_playing(self):
+        os.system("cls" if os.name == "nt" else "clear")
+
+        self.engine.map.print()
+        self.stats_widget()
