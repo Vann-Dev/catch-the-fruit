@@ -3,7 +3,6 @@ import random
 import os
 import time
 from src.lib.constant import screens, colors
-from threading import Thread
 
 
 class Interface:
@@ -17,16 +16,10 @@ class Interface:
 
         self.engine.screen_state = None
 
-        selected_choice = False
+        while True:
+            os.system("cls" if os.name == "nt" else "clear")
 
-        def random_color():
-            while True:
-                if selected_choice:
-                    break
-
-                os.system("cls" if os.name == "nt" else "clear")
-
-                print(f"""
+            print(f"""
 {random.choices(colors)[0]}
   /$$$$$$              /$$               /$$             /$$$$$$$$ /$$                       /$$$$$$$$                  /$$   /$$    
  /$$__  $$            | $$              | $$            |__  $$__/| $$                      | $$_____/                 |__/  | $$    
@@ -39,18 +32,12 @@ class Interface:
 \033[m
                 """)
 
-                print(f"""
+            print(f"""
 {"\n".join(selection_hover == selection and "\t➡️ ‎ \033[34m" + selection.capitalize() + "\033[m" or "\t‎   " + selection.capitalize() for selection in selections)}
 
 \tUse W and S to navigate, press Enter to select
                 """)
 
-                time.sleep(0.3)
-
-        color_thread = Thread(target=random_color)
-        color_thread.start()
-
-        while True:
             key = msvcrt.getch()
 
             if key == bytes("w", "utf-8"):
@@ -64,7 +51,6 @@ class Interface:
                 ]
 
             elif key == bytes("\r", "utf-8"):
-                selected_choice = True
                 if selection_hover == "start game":
                     self.engine.screen_state = screens["select"]
                     break
