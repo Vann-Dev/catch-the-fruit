@@ -1,7 +1,14 @@
-## Waktu yang dihabiskan di project ini: 
-[![wakatime](https://wakatime.com/badge/user/018d3b7b-b0a0-4749-bd25-8190f66f3c83/project/a0050a34-530b-4c3c-92d9-f9e946db4fd0.svg)](https://wakatime.com/badge/user/018d3b7b-b0a0-4749-bd25-8190f66f3c83/project/a0050a34-530b-4c3c-92d9-f9e946db4fd0)
+## Minimal Requirement
+
+- Windows 10
+- Python 3.12.2
 
 ## Cara menjalankan
+
 ```bash
 python app.py
 ```
+
+## Video Demo
+https://github.com/Vann-Dev/catch-the-fruit/assets/82990248/bf3aaea9-ef43-481b-8ac4-f68a551d6d23
+
