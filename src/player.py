@@ -12,13 +12,16 @@ class Player:
     def init(self, map):
         self.map = map
 
+    # Method untuk menampilkan karakter player
     def print(self):
         return "🤓"
 
+    # Method untuk menggerakan player
     def move(self, direction):
         current_pos_x = self.pos_x
         current_pos_y = self.pos_y
 
+        # Method untuk mengecek apakah player berada di posisi yang valid
         def check_path(x, y, fruit_only=False, door_only=False):
             if fruit_only:
                 return self.map.map.stack[y].stack[x] in fruits
@@ -30,6 +33,7 @@ class Player:
                 or self.map.map.stack[y].stack[x] == door
             )
 
+        # Method untuk menggerakan player sesuai arah yang diinput
         match direction:
             case "up":
                 if check_path(current_pos_x, current_pos_y + 1):
@@ -50,6 +54,7 @@ class Player:
             case _:
                 return
 
+        # pengecekan apakah player berada di posisi yang berisi fruit atau door
         self.touching_door = False
         if check_path(current_pos_x, current_pos_y, door_only=True):
             self.touching_door = True
@@ -60,6 +65,7 @@ class Player:
             )
             self.map.fruit_size -= 1
 
+        # pengubah posisi player
         if self.pos_x == self.map.door["x"] and self.pos_y == self.map.door["y"]:
             self.map.map.stack[self.pos_y].stack[self.pos_x] = door
         else:
@@ -70,6 +76,7 @@ class Player:
         self.pos_x = current_pos_x
         self.pos_y = current_pos_y
 
+        # Method untuk mengecek apakah player berada di posisi yang berisi door
         if self.touching_door:
             if self.map.fruit_size < 2 and self.engine.fruit.is_empty():
                 self.engine.screen_state = screens["credit"]

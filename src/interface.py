@@ -10,6 +10,7 @@ class Interface:
         self.engine = engine
         self.widget_text = ""
 
+    # method untuk menampilkan screen home
     def home_screen(self):
         selection_hover = "start game"
         selections = ["start game", "tutorial", "quit"]
@@ -38,6 +39,7 @@ class Interface:
 \tUse W and S to navigate, press Enter to select
                 """)
 
+            # handle input dari user
             key = msvcrt.getch()
 
             if key == bytes("w", "utf-8"):
@@ -51,14 +53,17 @@ class Interface:
                 ]
 
             elif key == bytes("\r", "utf-8"):
+                # jika user memilih start game, maka akan masuk ke screen select
                 if selection_hover == "start game":
                     self.engine.screen_state = screens["select"]
                     break
 
+                # jika user memilih tutorial, maka akan masuk ke screen tutorial
                 elif selection_hover == "tutorial":
                     self.engine.screen_state = screens["tutorial"]
                     break
 
+                # jika user memilih quit, maka akan keluar dari game
                 elif selection_hover == "quit":
                     os.system("cls" if os.name == "nt" else "clear")
                     exit()
@@ -66,6 +71,7 @@ class Interface:
             else:
                 continue
 
+    # method untuk menampilkan screen tutorial
     def tutorial_screen(self):
         os.system("cls" if os.name == "nt" else "clear")
 
@@ -91,6 +97,7 @@ Fruit Remaining: {self.engine.map.fruit_size}
 {self.widget_text}
         """)
 
+    # method untuk menampilkan screen select mode
     def select_mode_screen(self):
         self.engine.screen_state = None
 
@@ -140,6 +147,7 @@ Fruit Remaining: {self.engine.map.fruit_size}
                     self.engine.screen_state = screens["game"]
                     break
 
+    # method untuk menampilkan screen pause
     def pause_screen(self):
         selection_hover = "continue"
         selections = ["continue", "restart", "quit"]
@@ -180,18 +188,23 @@ Fruit Remaining: {self.engine.map.fruit_size}
                     (selections.index(selection_hover) + 1) % len(selections)
                 ]
 
+            # handle input dari user
             elif key == bytes("\r", "utf-8"):
+                # jika user memilih continue, maka akan kembali ke screen game
                 if selection_hover == "continue":
                     self.engine.screen_state = screens["game"]
                     break
+                # jika user memilih restart, maka akan mereset game
                 elif selection_hover == "restart":
                     self.engine.init_game(self.engine.game_mode)
                     self.engine.screen_state = screens["game"]
                     break
+                # jika user memilih quit, maka akan kembali ke screen home
                 elif selection_hover == "quit":
                     self.engine.screen_state = screens["home"]
                     break
 
+    # method untuk menampilkan screen game
     def game_screen(self):
         os.system("cls" if os.name == "nt" else "clear")
 
@@ -235,6 +248,7 @@ Game made by: Stevan Vincent (31230016) [https://www.vann.my.id]
 
         self.engine.screen_state = screens["home"]
 
+    # method untuk menampilkan interface game
     def game_screen_playing(self):
         os.system("cls" if os.name == "nt" else "clear")
 

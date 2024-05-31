@@ -1,9 +1,14 @@
+"""
+file ini berisi data data seperti settings game
+juga berisi beberapa config untuk map, engine dan masih banyak lagi
+"""
+
 import random
 
-car = "🚗"
 road = "🟫"
 door = "🚪"
 
+# ini merupakan settingan untuk beberapa mode yang tersedia
 modes = {
     "normal": {"height": 16, "width": 32, "fruit": 10, "fogg": False},
     "normal_dark": {"height": 16, "width": 32, "fruit": 10, "fogg": True},
